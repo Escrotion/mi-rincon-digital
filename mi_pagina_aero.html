@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✦ Mi Rincón Digital ✦</title>
+<link rel="icon" type="image/png" href="IMG/images.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --glass: rgba(255,255,255,0.25);
+    --glass-border: rgba(255,255,255,0.55);
+    --glass-dark: rgba(255,255,255,0.12);
+    --sky1: #a8d8f0;
+    --sky2: #c5eaff;
+    --green1: #5ed08a;
+    --green2: #2ab668;
+    --teal1: #00c9b1;
+    --blue1: #1a8fdb;
+    --blue2: #0d5fa8;
+    --white: #ffffff;
+    --text-dark: #0d3a5c;
+    --text-mid: #1a5c8a;
+    --shadow-glass: 0 8px 32px rgba(0,120,200,0.18), 0 2px 8px rgba(0,80,160,0.10);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Exo 2', 'Trebuchet MS', sans-serif;
+    background: #7ec8e3;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text-dark);
+  }
+
+  /* ============ ANIMATED BACKGROUND ============ */
+  .bg-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 120% 80% at 50% -10%, #b8e8ff 0%, #5ab8e8 35%, #2e8fcc 60%, #1a6fa8 100%),
+      linear-gradient(180deg, #5ab8e8 0%, #3da068 60%, #2a7a50 100%);
+    background-size: 100% 100%;
+  }
+
+  .bg-scene::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 90% 60% at 20% 80%, rgba(80,200,120,0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 80% 85%, rgba(40,170,100,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 90%, rgba(100,220,140,0.4) 0%, transparent 50%);
+  }
+
+  .bg-scene::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 55%;
+    background:
+      radial-gradient(ellipse 60% 40% at 75% 30%, rgba(255,255,255,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 25% 20%, rgba(200,240,255,0.18) 0%, transparent 55%);
+  }
+
+  /* Grass/ground */
+  .ground {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 28%;
+    background: linear-gradient(180deg, #3dba6e 0%, #2a9055 40%, #1e6e3e 100%);
+    z-index: 0;
+    border-radius: 80% 80% 0 0 / 20% 20% 0 0;
+  }
+
+  .ground::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: -5%; right: -5%;
+    height: 30px;
+    background: linear-gradient(180deg, #50d07a 0%, #3dba6e 100%);
+    border-radius: 50%;
+    box-shadow: 0 -4px 12px rgba(80,220,120,0.5);
+  }
+
+  /* ============ FLOATING ORBS ============ */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .orb-1 {
+    width: 160px; height: 160px;
+    top: 8%; left: 5%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(100,200,255,0.6) 40%, rgba(30,120,220,0.2) 80%);
+    box-shadow: 0 0 40px rgba(100,200,255,0.4), inset 0 0 30px rgba(255,255,255,0.3);
+    animation: floatOrb1 8s ease-in-out infinite;
+  }
+
+  .orb-2 {
+    width: 100px; height: 100px;
+    top: 15%; right: 8%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.85), rgba(80,230,180,0.55) 40%, rgba(20,160,100,0.15) 80%);
+    box-shadow: 0 0 30px rgba(80,230,180,0.35), inset 0 0 20px rgba(255,255,255,0.25);
+    animation: floatOrb2 6s ease-in-out infinite;
+  }
+
+  .orb-3 {
+    width: 70px; height: 70px;
+    top: 35%; left: 12%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.8), rgba(150,220,255,0.5) 45%, rgba(50,140,220,0.1) 80%);
+    box-shadow: 0 0 20px rgba(150,220,255,0.3), inset 0 0 15px rgba(255,255,255,0.2);
+    animation: floatOrb3 7s ease-in-out infinite;
+  }
+
+  .orb-4 {
+    width: 50px; height: 50px;
+    top: 20%; left: 40%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(200,240,255,0.6) 45%, rgba(100,180,240,0.1) 80%);
+    box-shadow: 0 0 15px rgba(180,230,255,0.4);
+    animation: floatOrb4 9s ease-in-out infinite;
+  }
+
+  .orb-5 {
+    width: 120px; height: 120px;
+    bottom: 32%; right: 5%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.85), rgba(100,240,180,0.5) 40%, rgba(20,160,80,0.1) 80%);
+    box-shadow: 0 0 30px rgba(100,240,180,0.3), inset 0 0 20px rgba(255,255,255,0.2);
+    animation: floatOrb1 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes floatOrb1 {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-18px) rotate(5deg); }
+    66% { transform: translateY(-8px) rotate(-3deg); }
+  }
+  @keyframes floatOrb2 {
+    0%,100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-22px) translateX(8px); }
+  }
+  @keyframes floatOrb3 {
+    0%,100% { transform: translateY(0); }
+    40% { transform: translateY(-14px) translateX(-5px); }
+    70% { transform: translateY(-6px) translateX(3px); }
+  }
+  @keyframes floatOrb4 {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+  }
+
+  /* ============ BUBBLES ============ */
+  .bubbles-container {
+    position: fixed;
+    bottom: 28%;
+    left: 0; right: 0;
+    height: 72%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .bubble {
+    position: absolute;
+    bottom: -40px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9) 0%, rgba(200,240,255,0.55) 30%, rgba(100,200,255,0.15) 65%, transparent 100%);
+    border: 1px solid rgba(255,255,255,0.6);
+    animation: riseUp linear infinite;
+  }
+
+  .bubble::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 30%;
+    height: 20%;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+    transform: rotate(-35deg);
+  }
+
+  .bubble:nth-child(1)  { width:18px; height:18px; left:8%;  animation-duration:8s;  animation-delay:0s; }
+  .bubble:nth-child(2)  { width:12px; height:12px; left:18%; animation-duration:11s; animation-delay:2s; }
+  .bubble:nth-child(3)  { width:25px; height:25px; left:28%; animation-duration:9s;  animation-delay:5s; }
+  .bubble:nth-child(4)  { width:10px; height:10px; left:38%; animation-duration:13s; animation-delay:1s; }
+  .bubble:nth-child(5)  { width:20px; height:20px; left:48%; animation-duration:7s;  animation-delay:3s; }
+  .bubble:nth-child(6)  { width:14px; height:14px; left:57%; animation-duration:10s; animation-delay:6s; }
+  .bubble:nth-child(7)  { width:30px; height:30px; left:65%; animation-duration:12s; animation-delay:0.5s; }
+  .bubble:nth-child(8)  { width:8px;  height:8px;  left:73%; animation-duration:9s;  animation-delay:4s; }
+  .bubble:nth-child(9)  { width:22px; height:22px; left:82%; animation-duration:11s; animation-delay:2.5s; }
+  .bubble:nth-child(10) { width:16px; height:16px; left:90%; animation-duration:8s;  animation-delay:7s; }
+  .bubble:nth-child(11) { width:11px; height:11px; left:13%; animation-duration:14s; animation-delay:9s; }
+  .bubble:nth-child(12) { width:19px; height:19px; left:44%; animation-duration:10s; animation-delay:8s; }
+
+  @keyframes riseUp {
+    0%   { transform: translateY(0) translateX(0)  scale(0.8); opacity:0; }
+    10%  { opacity: 0.8; }
+    80%  { opacity: 0.6; }
+    100% { transform: translateY(-75vh) translateX(20px) scale(1.1); opacity:0; }
+  }
+
+  /* ============ SPARKLES ============ */
+  .sparkle {
+    position: fixed;
+    width: 6px; height: 6px;
+    pointer-events: none;
+    z-index: 1;
+    animation: sparkleAnim 3s ease-in-out infinite;
+  }
+
+  .sparkle::before, .sparkle::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.9);
+    border-radius: 2px;
+  }
+  .sparkle::before { width:100%; height:2px; top:50%; transform:translateY(-50%); }
+  .sparkle::after  { width:2px; height:100%; left:50%; transform:translateX(-50%); }
+
+  .sparkle:nth-child(1) { top:12%; left:30%; animation-delay:0s; }
+  .sparkle:nth-child(2) { top:22%; left:60%; animation-delay:0.8s; width:8px; height:8px; }
+  .sparkle:nth-child(3) { top:40%; left:85%; animation-delay:1.6s; }
+  .sparkle:nth-child(4) { top:18%; left:50%; animation-delay:2.2s; width:5px; height:5px; }
+  .sparkle:nth-child(5) { top:30%; left:15%; animation-delay:0.4s; }
+
+  @keyframes sparkleAnim {
+    0%,100% { opacity:0; transform:scale(0) rotate(0deg); }
+    50% { opacity:1; transform:scale(1) rotate(45deg); }
+  }
+
+  /* ============ LAYOUT ============ */
+  .page-wrapper {
+    position: relative;
+    z-index: 10;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 16px 80px;
+  }
+
+  /* ============ HEADER ============ */
+  .site-header {
+    text-align: center;
+    padding: 30px 0 18px;
+    position: relative;
+  }
+
+  .site-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: white;
+    text-shadow:
+      0 2px 4px rgba(0,80,160,0.4),
+      0 0 30px rgba(100,200,255,0.6),
+      0 4px 20px rgba(0,50,120,0.3);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    animation: titlePulse 4s ease-in-out infinite;
+  }
+
+  @keyframes titlePulse {
+    0%,100% { text-shadow: 0 2px 4px rgba(0,80,160,0.4), 0 0 30px rgba(100,200,255,0.6), 0 4px 20px rgba(0,50,120,0.3); }
+    50% { text-shadow: 0 2px 4px rgba(0,80,160,0.4), 0 0 50px rgba(150,230,255,0.8), 0 4px 25px rgba(0,50,120,0.4); }
+  }
+
+  .site-subtitle {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    margin-top: 6px;
+    text-shadow: 0 1px 4px rgba(0,60,120,0.4);
+    letter-spacing: 1px;
+  }
+
+  /* ============ MARQUEE ============ */
+  .marquee-wrap {
+    margin: 10px 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.28), rgba(255,255,255,0.12));
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 5px 0;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 12px rgba(0,100,200,0.12);
+  }
+
+  .marquee-inner {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marqueeScroll 28s linear infinite;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  @keyframes marqueeScroll {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* ============ NAVIGATION ============ */
+  .nav-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 16px 0 28px;
+    flex-wrap: wrap;
+  }
+
+  .nav-btn {
+    padding: 8px 22px;
+    border-radius: 30px;
+    border: 1.5px solid rgba(255,255,255,0.7);
+    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(200,235,255,0.25) 50%, rgba(150,210,255,0.18) 100%);
+    color: var(--text-dark);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,100,200,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(6px);
+  }
+
+  .nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 100%);
+    border-radius: 30px 30px 0 0;
+  }
+
+  .nav-btn:hover {
+    background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(180,225,255,0.4) 50%, rgba(120,195,255,0.3) 100%);
+    box-shadow: 0 4px 20px rgba(0,120,220,0.3), inset 0 1px 0 rgba(255,255,255,0.9);
+    transform: translateY(-2px);
+  }
+
+  /* ============ GLASS PANEL ============ */
+  .glass-panel {
+    background: linear-gradient(155deg,
+      rgba(255,255,255,0.38) 0%,
+      rgba(200,235,255,0.28) 40%,
+      rgba(150,215,255,0.20) 70%,
+      rgba(100,195,240,0.15) 100%);
+    border: 1.5px solid rgba(255,255,255,0.6);
+    border-radius: 20px;
+    padding: 28px 32px;
+    box-shadow:
+      0 8px 32px rgba(0,100,200,0.15),
+      0 2px 8px rgba(0,60,160,0.08),
+      inset 0 1px 0 rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 45%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 100%);
+    border-radius: 20px 20px 60% 60% / 20px 20px 30px 30px;
+    pointer-events: none;
+  }
+
+  /* ============ SECTION HEADERS ============ */
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.5);
+  }
+
+  .section-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-icon::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50% 50% 50% 50% / 60% 60% 0 0;
+  }
+
+  .icon-green  { background: linear-gradient(145deg, #5ed08a, #2ab668); }
+  .icon-blue   { background: linear-gradient(145deg, #5ab8f0, #1a7ac8); }
+  .icon-yellow { background: linear-gradient(145deg, #ffd966, #e0a800); }
+  .icon-teal   { background: linear-gradient(145deg, #40e0c8, #0ea896); }
+
+  /* ============ INTRO SECTION ============ */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  @media(max-width:560px) {
+    .intro-grid { grid-template-columns: 1fr; }
+    .avatar-area { display:flex; flex-direction:column; align-items:center; }
+  }
+/*
+  .avatar-frame {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #a8e0ff, #4ab0f0, #1a78c8);
+    box-shadow:
+      0 0 0 4px rgba(255,255,255,0.6),
+      0 0 0 8px rgba(100,190,255,0.25),
+      0 8px 24px rgba(0,100,200,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    animation: avatarPulse 5s ease-in-out infinite;
+  }
+
+  .avatar-frame::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 10px;
+    width: 50%; height: 35%;
+    background: rgba(255,255,255,0.55);
+    border-radius: 50%;
+    transform: rotate(-20deg);
+    filter: blur(3px);
+  }
+
+  @keyframes avatarPulse {
+    0%,100% { box-shadow: 0 0 0 4px rgba(255,255,255,0.6), 0 0 0 8px rgba(100,190,255,0.25), 0 8px 24px rgba(0,100,200,0.3); }
+    50% { box-shadow: 0 0 0 4px rgba(255,255,255,0.7), 0 0 0 12px rgba(100,200,255,0.35), 0 8px 32px rgba(0,120,220,0.4); }
+  }
+*/
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: linear-gradient(135deg, rgba(80,220,120,0.35), rgba(40,180,90,0.25));
+    border: 1px solid rgba(80,220,120,0.6);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #0d5c2a;
+    margin-top: 10px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #22cc66;
+    box-shadow: 0 0 6px rgba(34,204,102,0.8);
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%,100% { opacity:1; }
+    50% { opacity:0.3; }
+  }
+
+  .intro-text p {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+  }
+
+  .intro-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  .tag {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 6px rgba(0,0,0,0.07);
+    letter-spacing: 0.3px;
+  }
+
+  .tag-blue  { background: linear-gradient(135deg, rgba(100,190,255,0.4), rgba(60,150,230,0.25)); color: #0a4a80; }
+  .tag-green { background: linear-gradient(135deg, rgba(80,220,130,0.4), rgba(40,180,90,0.25));  color: #0a4a22; }
+  .tag-teal  { background: linear-gradient(135deg, rgba(50,220,200,0.4), rgba(10,180,160,0.25)); color: #084a40; }
+  .tag-sky   { background: linear-gradient(135deg, rgba(160,220,255,0.5), rgba(100,190,255,0.3)); color: #083a60; }
+
+  /* ============ ANECDOTES ============ */
+  .anecdote-card {
+    background: linear-gradient(155deg, rgba(255,255,255,0.32), rgba(200,235,255,0.20));
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 16px rgba(0,80,180,0.10), inset 0 1px 0 rgba(255,255,255,0.6);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .anecdote-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,100,200,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+
+  .anecdote-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, transparent 100%);
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+  }
+
+  .anecdote-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .anecdote-num {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #5ab8f0, #1a7ac8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.78rem; font-weight: 900;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,100,200,0.3), inset 0 1px 0 rgba(255,255,255,0.5);
+    flex-shrink: 0;
+  }
+
+  .anecdote-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-dark);
+  }
+
+  .anecdote-body {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #1a4a6e;
+  }
+
+  .anecdote-footer {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: rgba(30,80,140,0.65);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ============ ACHIEVEMENTS ============ */
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .achievement-card {
+    background: linear-gradient(155deg, rgba(255,255,255,0.30), rgba(255,230,100,0.12), rgba(200,235,255,0.18));
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 16px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    box-shadow: 0 4px 16px rgba(0,80,180,0.10), inset 0 1px 0 rgba(255,255,255,0.65);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .achievement-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 8px 24px rgba(0,100,200,0.2), inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+
+  .achievement-card::before {
+    content: '';
+    position: absolute;
+    top:0; left:0; right:0;
+    height: 45%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+  }
+
+  .achievement-icon {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .achievement-icon::before {
+    content: '';
+    position: absolute;
+    top: 3px; left: 4px;
+    width: 60%; height: 35%;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    filter: blur(2px);
+  }
+
+  .icon-gold     { background: linear-gradient(145deg, #ffd966, #e0a800); }
+  .icon-silver   { background: linear-gradient(145deg, #d0dce8, #8fa8c0); }
+  .icon-platinum { background: linear-gradient(145deg, #b8f0e8, #20c0a0); }
+  .icon-diamond  { background: linear-gradient(145deg, #c0d8ff, #60a0f0); }
+  .icon-fire     { background: linear-gradient(145deg, #ffb060, #e05010); }
+  .icon-star     { background: linear-gradient(145deg, #e0b0ff, #9040e0); }
+  .icon-shield   { background: linear-gradient(145deg, #80e0a0, #20a040); }
+  .icon-crown    { background: linear-gradient(145deg, #ffe080, #d0a000); }
+
+  .achievement-info { flex: 1; min-width: 0; }
+
+  .achievement-game {
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: rgba(30,80,140,0.7);
+    margin-bottom: 2px;
+  }
+
+  .achievement-name {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .achievement-desc {
+    font-size: 0.78rem;
+    color: #2a5a88;
+    line-height: 1.5;
+  }
+
+  .achievement-rarity {
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+  }
+
+  .rarity-gold     { background: linear-gradient(135deg,rgba(255,215,80,0.4),rgba(220,170,0,0.25)); color:#6b4600; }
+  .rarity-silver   { background: linear-gradient(135deg,rgba(180,200,220,0.4),rgba(130,160,190,0.25)); color:#2a3a50; }
+  .rarity-platinum { background: linear-gradient(135deg,rgba(150,240,220,0.4),rgba(30,180,150,0.25)); color:#0a4a3a; }
+  .rarity-diamond  { background: linear-gradient(135deg,rgba(160,210,255,0.4),rgba(60,140,230,0.25)); color:#0a3060; }
+  .rarity-rare     { background: linear-gradient(135deg,rgba(200,160,255,0.4),rgba(130,60,220,0.25)); color:#3a0a60; }
+
+  /* ============ DECORATIVE ELEMENTS ============ */
+  .deco-bar {
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, transparent, rgba(100,200,255,0.6), rgba(80,230,160,0.6), rgba(100,200,255,0.6), transparent);
+    margin: 8px 0 20px;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%,100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  /* ============ COUNTER / FOOTER ============ */
+  .counter-section {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .counter-badge {
+    background: linear-gradient(155deg, rgba(255,255,255,0.35), rgba(200,235,255,0.22));
+    border: 1.5px solid rgba(255,255,255,0.65);
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    box-shadow: 0 2px 10px rgba(0,80,180,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+    text-align: center;
+    min-width: 90px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .counter-badge::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 45%;
+    background: rgba(255,255,255,0.3);
+    border-radius: 12px 12px 50% 50% / 12px 12px 8px 8px;
+    pointer-events: none;
+  }
+
+  .counter-num {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-dark);
+    text-shadow: 0 1px 3px rgba(255,255,255,0.5);
+  }
+
+  /* ============ VISITOR BADGE ============ */
+  .visitor-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(180,230,255,0.2));
+    border: 1.5px solid rgba(255,255,255,0.6);
+    border-radius: 10px;
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 10px auto 0;
+    max-width: 280px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    letter-spacing: 0.5px;
+  }
+
+  .visitor-counter {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    background: #001020;
+    color: #00ff88;
+    padding: 1px 6px;
+    border-radius: 4px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 6px rgba(0,255,136,0.6);
+  }
+
+  /* ============ UNDER CONSTRUCTION ============ */
+  .under-construction {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(255,210,40,0.45), rgba(255,160,0,0.3));
+    border: 1.5px solid rgba(255,200,0,0.6);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.73rem;
+    font-weight: 800;
+    color: #5a3a00;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+    animation: constructionPulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes constructionPulse {
+    0%,100% { opacity:1; }
+    50% { opacity:0.65; }
+  }
+
+  /* ============ FLOWERS/NATURE DECO ============ */
+  .nature-deco {
+    position: fixed;
+    bottom: 24%;
+    pointer-events: none;
+    z-index: 2;
+    font-size: 1.5rem;
+    animation: sway 4s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(0,80,0,0.3));
+  }
+
+  .nature-deco:nth-child(1) { left: 2%;  animation-delay: 0s; }
+  .nature-deco:nth-child(2) { left: 6%;  animation-delay: 0.5s; font-size: 1.2rem; }
+  .nature-deco:nth-child(3) { right: 2%; animation-delay: 1s; }
+  .nature-deco:nth-child(4) { right: 7%; animation-delay: 1.5s; font-size: 1.1rem; }
+
+  @keyframes sway {
+    0%,100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+
+  .birds-container {
+    position: fixed;
+    top: 12%;
+    right: 0;
+    pointer-events: none;
+    z-index: 2;
+    animation: flyAcross 18s linear infinite;
+  }
+
+  @keyframes flyAcross {
+    0% { transform: translateX(0); opacity: 0; }
+    5% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateX(-110vw); opacity: 0; }
+  }
+
+  .bird {
+    font-size: 1.1rem;
+    display: inline-block;
+    filter: drop-shadow(0 1px 3px rgba(0,40,100,0.3));
+  }
+
+  .bird:nth-child(2) { margin-left: 20px; margin-top: -8px; font-size: 0.9rem; animation: birdFlap 0.4s ease-in-out infinite alternate; }
+  .bird:nth-child(3) { margin-left: 12px; margin-top: 5px; font-size: 0.8rem; animation: birdFlap 0.5s ease-in-out infinite alternate 0.2s; }
+
+  @keyframes birdFlap {
+    0% { transform: scaleY(1) rotate(-5deg); }
+    100% { transform: scaleY(0.7) rotate(5deg); }
+  }
+
+  /* ============ IMAGE FRAMES ============ */
+  .img-frame {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.7);
+    box-shadow: 0 4px 16px rgba(0,80,180,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+    position: relative;
+  }
+
+  .img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .img-frame::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .photos-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  @media(max-width:500px) {
+    .photos-row { grid-template-columns: 1fr 1fr; }
+    .photos-row .img-frame:last-child { display: none; }
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  }
+
+  .divider-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 0 6px rgba(150,220,255,0.5);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: rgba(0,80,160,0.1); }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5ab8f0, #1a7ac8);
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-scene"></div>
+<div class="ground"></div>
+
+<!-- ORBS -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="orb orb-4"></div>
+<div class="orb orb-5"></div>
+
+<!-- SPARKLES -->
+<div class="sparkle"></div>
+<div class="sparkle"></div>
+<div class="sparkle"></div>
+<div class="sparkle"></div>
+<div class="sparkle"></div>
+
+<!-- BUBBLES -->
+<div class="bubbles-container">
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div>
+</div>
+
+<!-- NATURE DECORATIONS -->
+<div class="nature-deco">🌿</div>
+<div class="nature-deco">🍀</div>
+<div class="nature-deco">🌿</div>
+<div class="nature-deco">🍃</div>
+
+<!-- BIRDS -->
+<div class="birds-container">
+  <span class="bird">🐦</span>
+  <span class="bird">🐦</span>
+  <span class="bird">🐦</span>
+</div>
+
+<!-- ============================= MAIN CONTENT ============================= -->
+<div class="page-wrapper">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <h1 class="site-title">✦ Mi Rincón Digital ✦</h1>
+    <p class="site-subtitle">~ bienvenido/a a mi pequeño espacio en internet ~</p>
+    <div style="margin-top:10px;">
+      <span class="under-construction">🚧 en constante actualización 🚧</span>
+    </div>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <span class="marquee-inner">
+      ✦ ¡Hola a todos! ✦ &nbsp;·&nbsp; Esta es mi página personal &nbsp;·&nbsp; 🎮 Gamer, contador de historias, explorador del mundo digital &nbsp;·&nbsp; 🌿 Hecha con amor y píxeles &nbsp;·&nbsp; ✨ Bienvenido a mi espacio en la red &nbsp;·&nbsp; 🎮 Logros desbloqueados: muchos &nbsp;·&nbsp; 📖 Historias vividas: incontables &nbsp;·&nbsp; ✦ ¡Hola a todos! ✦
+    </span>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav-bar">
+    <a href="#intro" class="nav-btn">🏠 Inicio</a>
+    <a href="#anecdotas" class="nav-btn">📖 Anécdotas</a>
+    <a href="#logros" class="nav-btn">🏆 Logros</a>
+    <a href="#galeria" class="nav-btn">🖼️ Galería</a>
+    <a href="#contacto" class="nav-btn">💌 Contacto</a>
+  </nav>
+
+  <!-- ====== INTRO ====== -->
+  <section id="intro">
+    <div class="glass-panel">
+      <h2 class="section-title">
+        <span class="section-icon icon-green">🌟</span>
+        Sobre mí
+      </h2>
+      <div class="deco-bar"></div>
+      <div class="intro-grid">
+        <div class="avatar-area" style="display:flex;flex-direction:column;align-items:center;">
+          <div class="avatar-frame">
+            <img src="IMG/ghastrer.gif" alt="Adiós" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+          </div>
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            En línea
+          </div>
+          <div style="margin-top:12px;text-align:center;">
+            <div style="font-size:0.7rem;font-weight:700;color:rgba(30,80,140,0.7);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:4px;">Humor actual</div>
+            <div style="font-size:0.88rem;color:var(--text-dark);font-weight:600;">🎮 Modo explorador</div>
+          </div>
+        </div>
+        <div class="intro-text">
+          <p>¡Hola! Bienvenido/a a mi pequeño rincón en internet. Me alegra mucho que hayas encontrado este lugar — piensa en él como mi cuaderno digital personal, donde guardo todo lo que me apasiona y hace que mis días sean más interesantes.</p>
+          <p>Me encantan los videojuegos, vivir aventuras inesperadas y luego poder contarlas. Llevo años acumulando historias que parecen sacadas de una película y logros de los que me siento orgulloso. En esta página encontrarás todo eso y más.</p>
+          <p>Esta web es mi pequeño trozo de internet, como en los viejos tiempos cuando todo el mundo tenía la suya propia. ¡Espero que disfrutes el paseo! 🌿</p>
+          <div class="intro-tags">
+            <span class="tag tag-blue">🎮 Gamer</span>
+            <span class="tag tag-green">📖 Narrador</span>
+            <span class="tag tag-teal">🌍 Viajero</span>
+            <span class="tag tag-sky">💻 Tech nerd</span>
+            <span class="tag tag-blue">🎵 Melómano</span>
+            <span class="tag tag-green">🌿 Naturaleza</span>
+            <span class="tag tag-teal">☕ Cafeína dependiente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ANECDOTAS ====== -->
+  <section id="anecdotas">
+    <div class="glass-panel">
+      <h2 class="section-title">
+        <span class="section-icon icon-blue">📖</span>
+        Anécdotas e Historias
+      </h2>
+      <div class="deco-bar"></div>
+      <p style="font-size:0.88rem;color:#1a4a6e;margin-bottom:18px;line-height:1.6;">La vida está llena de momentos que merecen ser contados. Aquí guardo los que más me marcaron — de los que te hacen reír, reflexionar, o simplemente quedarte con la boca abierta.</p>
+
+      <div class="anecdote-card">
+        <div class="anecdote-header">
+          <div class="anecdote-num">01</div>
+          <h3 class="anecdote-title">La noche que perdí el tren y terminé en otro país</h3>
+        </div>
+        <p class="anecdote-body">Era verano, tenía el billete en el bolsillo y una mochila demasiado pesada. Me quedé dormido en el andén durante exactamente 4 minutos — los suficientes para ver cómo el tren se alejaba sin mí. Lo que vino después fue una cadena de improvisaciones, un autobús nocturno, una señora que me dio un sándwich y, al final del día, acabé durmiendo en un hostel en una ciudad que ni estaba en mis planes. Resultó ser uno de los mejores días de ese verano.</p>
+        <div class="anecdote-footer">
+          <span>📅 Verano de 2019</span>
+          <span>·</span>
+          <span>🗺️ Algún lugar de Europa</span>
+          <span>·</span>
+          <span>⏱️ Historia de 3 min</span>
+        </div>
+      </div>
+
+      <div class="anecdote-card">
+        <div class="anecdote-header">
+          <div class="anecdote-num">02</div>
+          <h3 class="anecdote-title">Cuando fui el único espectador de un concierto</h3>
+        </div>
+        <p class="anecdote-body">Un grupo que seguía desde hace tiempo anunció un concierto en una sala pequeña. Compré la entrada, llegué emocionado... y la sala estaba vacía. Completamente vacía. Solo yo. El grupo se miró entre ellos, se encogió de hombros, y tocó durante dos horas completas para mí solo. Al final acabamos cenando juntos. Uno de esos momentos que nunca puedes repetir aunque quieras.</p>
+        <div class="anecdote-footer">
+          <span>📅 Otoño de 2021</span>
+          <span>·</span>
+          <span>🎸 Concierto privado accidental</span>
+          <span>·</span>
+          <span>⏱️ Historia de 2 min</span>
+        </div>
+      </div>
+
+      <div class="anecdote-card">
+        <div class="anecdote-header">
+          <div class="anecdote-num">03</div>
+          <h3 class="anecdote-title">El bug que me hizo famoso en un foro durante 48 horas</h3>
+        </div>
+        <p class="anecdote-body">Estaba jugando a un MMO cuando de repente mi personaje empezó a volar sin ninguna razón aparente. Lo grabé, lo subí a un foro de nicho, y en menos de 24 horas el post tenía miles de respuestas. Los desarrolladores contactaron conmigo para preguntarme qué había hecho exactamente. La respuesta honesta: absolutamente nada. Fue el bug más reproducible e irreproducible al mismo tiempo. Nadie más lo volvió a ver. Hasta hoy es un misterio.</p>
+        <div class="anecdote-footer">
+          <span>📅 Invierno de 2020</span>
+          <span>·</span>
+          <span>🎮 Legendario bug</span>
+          <span>·</span>
+          <span>⏱️ Historia de 4 min</span>
+        </div>
+      </div>
+
+      <div class="anecdote-card">
+        <div class="anecdote-header">
+          <div class="anecdote-num">04</div>
+          <h3 class="anecdote-title">La apuesta que casi me hace aprender mandarín</h3>
+        </div>
+        <p class="anecdote-body">Una noche tranquila de juegos en línea, alguien del equipo rival habló por el micrófono en mandarín. Por algún motivo que aún no entiendo bien, aposté que si ganaban yo aprendería el idioma. Perdimos. Pasé tres meses estudiando mandarín con más determinación que cualquier otra cosa en mi vida. Llegué a nivel básico. El jugador del otro equipo resultó ser de Barcelona y lo habló como broma. Nos reímos mucho. Yo tengo ahora nociones de mandarín.</p>
+        <div class="anecdote-footer">
+          <span>📅 Primavera de 2022</span>
+          <span>·</span>
+          <span>🀄 Duolingo intensivo</span>
+          <span>·</span>
+          <span>⏱️ Historia de 3 min</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== LOGROS ====== -->
+  <section id="logros">
+    <div class="glass-panel">
+      <h2 class="section-title">
+        <span class="section-icon icon-yellow">🏆</span>
+        Logros en Videojuegos
+      </h2>
+      <div class="deco-bar"></div>
+      <p style="font-size:0.88rem;color:#1a4a6e;margin-bottom:18px;line-height:1.6;">Horas de esfuerzo, sudor y algún que otro momento de pura rabia condensados aquí. Cada uno de estos logros tiene su historia — y algún día las escribiré todas.</p>
+
+      <div class="achievements-grid">
+
+        <div class="achievement-card">
+          <div class="achievement-icon icon-gold">⚔️</div>
+          <div class="achievement-info">
+            <div class="achievement-game">The Legend of Zelda: OoT</div>
+            <div class="achievement-name">Sin Game Over</div>
+            <div class="achievement-desc">Completado al 100% sin morir ni una sola vez. 6 horas de pura concentración.</div>
+            <span class="achievement-rarity rarity-gold">Legendary</span>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon icon-diamond">💎</div>
+          <div class="achievement-info">
+            <div class="achievement-game">Dark Souls</div>
+            <div class="achievement-name">All Bosses</div>
+            <div class="achievement-desc">Todos los jefes derrotados en un único run sin morir. Lo intenté 47 veces.</div>
+            <span class="achievement-rarity rarity-diamond">Diamond</span>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon icon-platinum">🌊</div>
+          <div class="achievement-info">
+            <div class="achievement-game">Hollow Knight</div>
+            <div class="achievement-name">Completado al 112%</div>
+            <div class="achievement-desc">Cada secreto, cada enemigo, cada coleccionable. Un mapa lleno de amor.</div>
+            <span class="achievement-rarity rarity-platinum">Platinum</span>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon icon-fire">🔥</div>
+          <div class="achievement-info">
+            <div class="achievement-game">Minecraft</div>
+            <div class="achievement-name">El Dragón Caído</div>
+            <div class="achievement-desc">Ender Dragon derrotado con solo una espada de madera. Sí, de madera.</div>
+            <span class="achievement-rarity rarity-rare">Epic</span>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon icon-star">⭐</div>
+          <div class="achievement-info">
+            <div class="achievement-game">League of Legends</div>
+            <div class="achievement-name">Diamond IV</div>
+            <div class="achievement-desc">Temporada 2022. El elo más alto que he alcanzado. Con Zilean support.</div>
+            <span class="achievement-rarity rarity-diamond">Diamond</span>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon icon-shield">🛡️</div>
+          <div class="achievement-info">
+            <div class="achievement-game">Stardew Valley</div>
+            <div class="achievement-name">Perfeccionista</div>
+            <div class="achievement-desc">Granja perfecta, todas las recetas, todos los amigos al máximo. Puro chill.</div>
+            <span class="achievement-rarity rarity-platinum">Platinum</span>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon icon-crown">👑</div>
+          <div class="achievement-info">
+            <div class="achievement-game">Celeste</div>
+            <div class="achievement-name">True Ending</div>
+            <div class="achievement-desc">Todas las fresas doradas recogidas. Mis dedos nunca fueron los mismos.</div>
+            <span class="achievement-rarity rarity-gold">Legendary</span>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="achievement-icon icon-silver">🎯</div>
+          <div class="achievement-info">
+            <div class="achievement-game">Among Us</div>
+            <div class="achievement-name">Impostor Maestro</div>
+            <div class="achievement-desc">15 partidas seguidas como impostor sin ser votado ni una vez. Actriz/actor nato.</div>
+            <span class="achievement-rarity rarity-silver">Rare</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- STATS -->
+      <div style="margin-top:22px;">
+        <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:16px;">
+          <div class="counter-badge"><span class="counter-num">847</span>juegos jugados</div>
+          <div class="counter-badge"><span class="counter-num">4.2K</span>horas en total</div>
+          <div class="counter-badge"><span class="counter-num">312</span>logros</div>
+          <div class="counter-badge"><span class="counter-num">97%</span>completados</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== GALERÍA ====== -->
+  <section id="galeria">
+    <div class="glass-panel">
+      <h2 class="section-title">
+        <span class="section-icon icon-teal">🖼️</span>
+        Galería Aero
+      </h2>
+      <div class="deco-bar"></div>
+      <p style="font-size:0.88rem;color:#1a4a6e;margin-bottom:14px;">Imágenes que capturan la esencia de esta estética que tanto amo — naturaleza, tecnología y ese brillo característico de los 2000s.</p>
+      <div class="photos-row">
+        <div class="img-frame" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80" alt="Montaña cielo" loading="lazy">
+        </div>
+        <div class="img-frame" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=400&q=80" alt="Hojas naturaleza" loading="lazy">
+        </div>
+        <div class="img-frame" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=400&q=80" alt="Bosque" loading="lazy">
+        </div>
+        <div class="img-frame" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80" alt="Lago montaña" loading="lazy">
+        </div>
+        <div class="img-frame" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80" alt="Colinas verdes" loading="lazy">
+        </div>
+        <div class="img-frame" style="height:160px;">
+          <img src="https://images.unsplash.com/photo-1540304453527-62f979142a17?w=400&q=80" alt="Agua cristalina" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACTO ====== -->
+  <section id="contacto">
+    <div class="glass-panel">
+      <h2 class="section-title">
+        <span class="section-icon icon-blue">💌</span>
+        Contacto
+      </h2>
+      <div class="deco-bar"></div>
+      <p style="font-size:0.9rem;color:#1a4a6e;margin-bottom:16px;line-height:1.7;">¿Tienes alguna historia que contar? ¿Quieres debatir sobre videojuegos? ¿O simplemente pasarte a decir hola? ¡Me alegra escucharte! En los viejos tiempos de internet, esta sección sería un libro de visitas. Quizá algún día lo añada. 😄</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <a href="#" class="nav-btn">💬 Discord</a>
+        <a href="#" class="nav-btn">🐦 Twitter / X</a>
+        <a href="#" class="nav-btn">📸 Instagram</a>
+        <a href="#" class="nav-btn">🎮 Steam</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER COUNTER SECTION -->
+  <div class="counter-section">
+    <div class="counter-badge"><span class="counter-num" id="visitor-count">00000</span>visitas totales</div>
+    <div class="counter-badge"><span class="counter-num">2006</span>est. en espíritu</div>
+    <div class="counter-badge"><span class="counter-num">♥</span>hecho con amor</div>
+  </div>
+
+  <div class="visitor-badge">
+    📟 Visita nº <span class="visitor-counter" id="visit-display">001337</span> — ¡Gracias por estar aquí!
+  </div>
+
+  <p style="text-align:center;margin-top:14px;font-size:0.72rem;color:rgba(255,255,255,0.65);letter-spacing:0.5px;">
+    ✦ Optimizado para 1024×768 · IE6 y Netscape Navigator · Mejor visto con los ojos abiertos ✦
+  </p>
+
+</div>
+
+<script>
+  const el = document.getElementById('visitor-count');
+  const el2 = document.getElementById('visit-display');
+  const base = 14823;
+  const rand = Math.floor(Math.random() * 200);
+  const total = base + rand;
+  el.textContent = total.toLocaleString('es-ES');
+  el2.textContent = String(total).padStart(6,'0');
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
